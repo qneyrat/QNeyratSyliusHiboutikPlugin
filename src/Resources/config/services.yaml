@@ -1,0 +1,29 @@
+imports:
+  - { resource: "./services/serializer.yaml" }
+
+services:
+  qneyrat.hiboutik.client.hiboutik:
+    class: QNeyrat\SyliusHiboutikPlugin\Client\HiboutikClient
+
+  qneyrat.hiboutik.repository.hiboutik:
+    class: QNeyrat\SyliusHiboutikPlugin\Repository\HiboutikRepository
+    arguments:
+      - "@qneyrat.hiboutik.client.hiboutik"
+      - "@qneyrat.hiboutik.serializer"
+
+  qneyrat.hiboutik.processor.hiboutik_product:
+    class: QNeyrat\SyliusHiboutikPlugin\Processor\HiboutikProductProcessor
+    arguments:
+      - "@sylius.factory.product"
+      - "@sylius.repository.product"
+      - "@sylius.generator.slug"
+      - "@sylius.locale_provider"
+
+  qneyrat.hiboutik.command.import_data:
+    class: QNeyrat\SyliusHiboutikPlugin\Command\ImportDataCommand
+    arguments:
+      - "@qneyrat.hiboutik.repository.hiboutik"
+      - "@sylius.repository.channel"
+      - '@qneyrat.hiboutik.processor.hiboutik_product'
+    tags:
+      - { name: 'console.command' }
