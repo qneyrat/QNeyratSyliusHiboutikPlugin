@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace QNeyrat\SyliusHiboutikPlugin\Model;
 
 class HiboutikStockAvailable

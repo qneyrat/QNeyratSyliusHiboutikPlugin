@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace QNeyrat\SyliusHiboutikPlugin\Repository;
 
 use QNeyrat\SyliusHiboutikPlugin\Model\HiboutikProduct;
@@ -13,14 +15,21 @@ interface HiboutikRepositoryInterface {
     public function findProducts();
 
     /**
-     * @param int $productId
+     * @param int $hiboutikProductId
      * @return HiboutikProduct|bool
      */
-    public function findProductById(int $productId);
+    public function findProductById(int $hiboutikProductId);
 
     /**
-     * @param int $productId
+     * @param int $hiboutikProductId
      * @return HiboutikStockAvailable[]
      */
-    public function findStocksAvailableByProduct(int $productId);
+    public function findStocksAvailableByProduct(int $hiboutikProductId);
+
+    /**
+     * @param int $hiboutikProductId
+     * @param int $hiboutikProductVariantId
+     * @return HiboutikStockAvailable
+     */
+    public function findStocksAvailableByProductVariantId(int $hiboutikProductId, int $hiboutikProductVariantId);
 }

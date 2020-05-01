@@ -11,19 +11,52 @@ services:
       - "@qneyrat.hiboutik.client.hiboutik"
       - "@qneyrat.hiboutik.serializer"
 
-  qneyrat.hiboutik.processor.hiboutik_product:
-    class: QNeyrat\SyliusHiboutikPlugin\Processor\HiboutikProductProcessor
+  qneyrat.hiboutik.transformer.product_code:
+    class: QNeyrat\SyliusHiboutikPlugin\Transformer\ProductCodeTransformer
+
+  qneyrat.hiboutik.transformer.variant_product_code:
+    class: QNeyrat\SyliusHiboutikPlugin\Transformer\ProductVariantCodeTransformer
+
+  qneyrat.hiboutik.processor.product:
+    class: QNeyrat\SyliusHiboutikPlugin\Processor\ProductProcessor
     arguments:
       - "@sylius.factory.product"
       - "@sylius.repository.product"
+      - "@sylius.repository.channel"
+      - "@sylius.factory.product_variant"
+      - "@sylius.factory.channel_pricing"
+      - "@sylius.repository.product_variant"
+      - "@sylius.repository.channel_pricing"
       - "@sylius.generator.slug"
       - "@sylius.locale_provider"
+      - "@sylius.repository.taxon"
+      - "@sylius.custom_factory.taxon"
+      - "@sylius.repository.product_taxon"
+      - "@sylius.factory.product_taxon"
+      - "@qneyrat.hiboutik.transformer.product_code"
+      - "@qneyrat.hiboutik.transformer.variant_product_code"
 
-  qneyrat.hiboutik.command.import_data:
-    class: QNeyrat\SyliusHiboutikPlugin\Command\ImportDataCommand
+  qneyrat.hiboutik.provider.stock_of_hiboutik_product:
+    class: QNeyrat\SyliusHiboutikPlugin\Provider\StockOfHiboutikProductProvider
     arguments:
       - "@qneyrat.hiboutik.repository.hiboutik"
-      - "@sylius.repository.channel"
-      - '@qneyrat.hiboutik.processor.hiboutik_product'
+      - "@qneyrat.hiboutik.transformer.variant_product_code"
+
+  qneyrat.hiboutik.checker.hiboutik_product:
+    class: QNeyrat\SyliusHiboutikPlugin\Checker\HiboutikProductChecker
+
+  sylius.availability_checker:
+    class: QNeyrat\SyliusHiboutikPlugin\Checker\HiboutikAvailabilityChecker
+    decorates: sylius.availability_checker.default
+    arguments:
+      - "@sylius.availability_checker.inner"
+      - "@qneyrat.hiboutik.checker.hiboutik_product"
+      - "@qneyrat.hiboutik.provider.stock_of_hiboutik_product"
+
+  qneyrat.hiboutik.command.import_hiboutik_products_data:
+    class: QNeyrat\SyliusHiboutikPlugin\Command\ImportHiboutikProductsDataCommand
+    arguments:
+      - "@qneyrat.hiboutik.repository.hiboutik"
+      - '@qneyrat.hiboutik.processor.product'
     tags:
       - { name: 'console.command' }

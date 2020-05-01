@@ -21,7 +21,8 @@
         "symfony/property-info": "^5.0",
         "phpdocumentor/reflection-docblock": "^5.1",
         "symfony/cache": "^5.0",
-        "symfony/serializer-pack": "^1.0"
+        "symfony/serializer-pack": "^1.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.0",

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace QNeyrat\SyliusHiboutikPlugin\Client;
 
 use Fig\Http\Message\RequestMethodInterface;
@@ -11,6 +13,7 @@ const HIBOUTIK_URL_API = 'https://%s.hiboutik.com/api/';
 const PRODUCTS_ROUTE = "products";
 const PRODUCT_BY_ID_ROUTE =  "products/%d";
 const STOCK_AVAILABLE_BY_PRODUCT_ID = "stock_available/product_id/%d";
+const STOCK_AVAILABLE_BY_PRODUCT_VARIANT_ID = "stock_available/product_id_size/%d/%d";
 
 class HiboutikClient implements HiboutikClientInterface {
 
@@ -37,14 +40,19 @@ class HiboutikClient implements HiboutikClientInterface {
         return $this->get(PRODUCTS_ROUTE);
     }
 
-    public function productById(int $productId)
+    public function productById(int $hiboutikProductId)
     {
-        return current($this->get(sprintf(PRODUCT_BY_ID_ROUTE, $productId)));
+        return current($this->get(sprintf(PRODUCT_BY_ID_ROUTE, $hiboutikProductId)));
     }
 
-    public function stocksAvailableByProductId(int $productId)
+    public function stocksAvailableByProductId(int $hiboutikProductId)
     {
-        return $this->get(sprintf(STOCK_AVAILABLE_BY_PRODUCT_ID, $productId));
+        return $this->get(sprintf(STOCK_AVAILABLE_BY_PRODUCT_ID, $hiboutikProductId));
+    }
+
+    public function stocksAvailableByProductVariantId(int $hiboutikProductId, int $hiboutikProductVariantId)
+    {
+        return current($this->get(sprintf(STOCK_AVAILABLE_BY_PRODUCT_VARIANT_ID, $hiboutikProductId, $hiboutikProductVariantId)));
     }
 
     private function get(string $ressource)
