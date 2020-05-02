@@ -20,7 +20,7 @@ class HiboutikAvailabilityChecker implements AvailabilityCheckerInterface
     /**
      * @var StockOfHiboutikProductProvider
      */
-    private StockOfHiboutikProductProvider $stockOfVariantProductFromHiboutikProvider;
+    private StockOfHiboutikProductProvider $stockOfHiboutikProductProvider;
 
     /**
      * @var HiboutikProductChecker
@@ -30,11 +30,11 @@ class HiboutikAvailabilityChecker implements AvailabilityCheckerInterface
     public function __construct(
         AvailabilityCheckerInterface $parent,
         HiboutikProductChecker $hiboutikProductChecker,
-        StockOfHiboutikProductProvider $stockOfVariantProductFromHiboutikProvider
+        StockOfHiboutikProductProvider $stockOfHiboutikProductProvider
     ) {
         $this->parent = $parent;
         $this->hiboutikProductChecker = $hiboutikProductChecker;
-        $this->stockOfVariantProductFromHiboutikProvider = $stockOfVariantProductFromHiboutikProvider;
+        $this->stockOfHiboutikProductProvider = $stockOfHiboutikProductProvider;
     }
 
     public function isStockAvailable(StockableInterface $stockable): bool
@@ -46,7 +46,7 @@ class HiboutikAvailabilityChecker implements AvailabilityCheckerInterface
     {
         if ($stockable instanceof CodeAwareInterface && $this->hiboutikProductChecker->isHiboutikProduct($stockable)) {
             return $this->parent->isStockSufficient($stockable, $quantity) &&
-                $quantity <= $this->stockOfVariantProductFromHiboutikProvider->getStock($stockable);
+                $quantity <= $this->stockOfHiboutikProductProvider->getStock($stockable);
         }
 
         return $this->parent->isStockSufficient($stockable, $quantity);

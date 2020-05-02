@@ -30,7 +30,8 @@ final class ImportHiboutikProductsDataCommand extends Command
     public function __construct(
         HiboutikRepositoryInterface $hiboutikClient,
         ProductProcessor $productProcessor
-    ) {
+    )
+    {
         parent::__construct();
         $this->hiboutikRepository = $hiboutikClient;
         $this->productProcessor = $productProcessor;

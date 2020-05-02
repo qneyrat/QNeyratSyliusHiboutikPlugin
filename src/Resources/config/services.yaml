@@ -1,40 +1,74 @@
 imports:
   - { resource: "./services/serializer.yaml" }
+  - { resource: "./services/money.yaml" }
 
 services:
   qneyrat.hiboutik.client.hiboutik:
     class: QNeyrat\SyliusHiboutikPlugin\Client\HiboutikClient
+    arguments:
+      - "@?"
+      - "@?"
+      - "@?"
 
   qneyrat.hiboutik.repository.hiboutik:
     class: QNeyrat\SyliusHiboutikPlugin\Repository\HiboutikRepository
     arguments:
       - "@qneyrat.hiboutik.client.hiboutik"
-      - "@qneyrat.hiboutik.serializer"
+      - "@qneyrat.hiboutik.serializer.serializer"
 
   qneyrat.hiboutik.transformer.product_code:
     class: QNeyrat\SyliusHiboutikPlugin\Transformer\ProductCodeTransformer
+    arguments:
+      - "@?"
 
   qneyrat.hiboutik.transformer.variant_product_code:
     class: QNeyrat\SyliusHiboutikPlugin\Transformer\ProductVariantCodeTransformer
+    arguments:
+      - "@?"
+
+  qneyrat.hiboutik.provider.price:
+    class: QNeyrat\SyliusHiboutikPlugin\Provider\PriceProvider
+    arguments:
+      - "@?"
+      - "@qneyrat.hiboutik.money.parser.decimal_money"
+
+  qneyrat.hiboutik.provider.default_taxon:
+    class: QNeyrat\SyliusHiboutikPlugin\Provider\DefaultTaxonProvider
+    arguments:
+      - "@?"
+      - "@sylius.repository.taxon"
+      - "@sylius.custom_factory.taxon"
+      - "@sylius.generator.slug"
+
+  qneyrat.hiboutik.factory.product:
+    class: QNeyrat\SyliusHiboutikPlugin\Factory\ProductFactory
+    arguments:
+      - "@sylius.factory.product"
+      - "@sylius.generator.slug"
+      - "@sylius.repository.product_taxon"
+      - "@sylius.factory.product_taxon"
+
+  qneyrat.hiboutik.factory.product_variant:
+    class: QNeyrat\SyliusHiboutikPlugin\Factory\ProductVariantFactory
+    arguments:
+      - "@sylius.factory.product_variant"
+      - "@sylius.repository.channel_pricing"
+      - "@sylius.factory.channel_pricing"
+      - "@qneyrat.hiboutik.provider.price"
 
   qneyrat.hiboutik.processor.product:
     class: QNeyrat\SyliusHiboutikPlugin\Processor\ProductProcessor
     arguments:
-      - "@sylius.factory.product"
       - "@sylius.repository.product"
       - "@sylius.repository.channel"
-      - "@sylius.factory.product_variant"
-      - "@sylius.factory.channel_pricing"
       - "@sylius.repository.product_variant"
-      - "@sylius.repository.channel_pricing"
       - "@sylius.generator.slug"
       - "@sylius.locale_provider"
-      - "@sylius.repository.taxon"
-      - "@sylius.custom_factory.taxon"
-      - "@sylius.repository.product_taxon"
-      - "@sylius.factory.product_taxon"
       - "@qneyrat.hiboutik.transformer.product_code"
       - "@qneyrat.hiboutik.transformer.variant_product_code"
+      - "@qneyrat.hiboutik.factory.product"
+      - "@qneyrat.hiboutik.provider.default_taxon"
+      - "@qneyrat.hiboutik.factory.product_variant"
 
   qneyrat.hiboutik.provider.stock_of_hiboutik_product:
     class: QNeyrat\SyliusHiboutikPlugin\Provider\StockOfHiboutikProductProvider
@@ -44,6 +78,8 @@ services:
 
   qneyrat.hiboutik.checker.hiboutik_product:
     class: QNeyrat\SyliusHiboutikPlugin\Checker\HiboutikProductChecker
+    arguments:
+      - "@?"
 
   sylius.availability_checker:
     class: QNeyrat\SyliusHiboutikPlugin\Checker\HiboutikAvailabilityChecker

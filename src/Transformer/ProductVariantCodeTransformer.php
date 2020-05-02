@@ -4,18 +4,58 @@ declare(strict_types=1);
 
 namespace QNeyrat\SyliusHiboutikPlugin\Transformer;
 
-const PRODUCT_VARIANT_CODE_SCHEME = "HIBOUTIK_%d_%d";
+use QNeyrat\SyliusHiboutikPlugin\Exception\MalformedCodeForHiboutikProductException;
 
+const PRODUCT_VARIANT_CODE_SCHEME = "_%d_%d";
 
 class ProductVariantCodeTransformer
 {
-    public function transform(int $hiboutikProductId, int $hiboutikProductVariantId): string
+    /**
+     * @var string
+     */
+    private string $productCodePrefix;
+
+    /**
+     * ProductVariantCodeTransformer constructor.
+     * @param string $productCodePrefix
+     */
+    public function __construct(string $productCodePrefix)
     {
-        return sprintf(PRODUCT_VARIANT_CODE_SCHEME, $hiboutikProductId, $hiboutikProductVariantId);
+        $this->productCodePrefix = $productCodePrefix;
     }
 
+    /**
+     * @param int $hiboutikProductId
+     * @param int $hiboutikProductVariantId
+     * @return string
+     */
+    public function transform(int $hiboutikProductId, int $hiboutikProductVariantId): string
+    {
+        return sprintf(
+            $this->productCodePrefix . PRODUCT_VARIANT_CODE_SCHEME,
+            $hiboutikProductId,
+            $hiboutikProductVariantId
+        );
+    }
+
+    /**
+     * @param string $productVariantCode
+     * @return array
+     * @throws MalformedCodeForHiboutikProductException
+     */
     public function reverse(string $productVariantCode): array
     {
-        return sscanf($productVariantCode, PRODUCT_VARIANT_CODE_SCHEME);
+        $n = sscanf(
+            $productVariantCode,
+            $this->productCodePrefix . PRODUCT_CODE_SCHEME,
+            $hiboutikProductId,
+            $hiboutikProductVariantId
+        );
+
+        if ($n !== 1 || $hiboutikProductId === null || $hiboutikProductVariantId === null) {
+            throw new MalformedCodeForHiboutikProductException();
+        }
+
+        return [$hiboutikProductId, $hiboutikProductVariantId];
     }
 }

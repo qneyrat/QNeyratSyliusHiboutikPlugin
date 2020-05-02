@@ -4,18 +4,47 @@ declare(strict_types=1);
 
 namespace QNeyrat\SyliusHiboutikPlugin\Transformer;
 
-const PRODUCT_CODE_SCHEME = "HIBOUTIK_%d";
+use QNeyrat\SyliusHiboutikPlugin\Exception\MalformedCodeForHiboutikProductException;
+
+const PRODUCT_CODE_SCHEME = "_%d";
 
 class ProductCodeTransformer
 {
-    public function transform(int $hiboutikProductId): string
+    /**
+     * @var string
+     */
+    private string $productCodePrefix;
+
+    /**
+     * ProductCodeTransformer constructor.
+     * @param string $productCodePrefix
+     */
+    public function __construct(string $productCodePrefix)
     {
-        return sprintf(PRODUCT_CODE_SCHEME, $hiboutikProductId);
+        $this->productCodePrefix = $productCodePrefix;
     }
 
+    /**
+     * @param int $hiboutikProductId
+     * @return string
+     */
+    public function transform(int $hiboutikProductId): string
+    {
+        return sprintf($this->productCodePrefix . PRODUCT_CODE_SCHEME, $hiboutikProductId);
+    }
+
+    /**
+     * @param string $productCode
+     * @return int
+     * @throws MalformedCodeForHiboutikProductException
+     */
     public function reverse(string $productCode): int
     {
-        list($hiboutikProductHiboutik) = sscanf($productCode, PRODUCT_CODE_SCHEME);
-        return $hiboutikProductHiboutik;
+        $n = sscanf($productCode, $this->productCodePrefix . PRODUCT_CODE_SCHEME, $hiboutikProductId);
+        if ($n !== 1 || $hiboutikProductId === null) {
+            throw new MalformedCodeForHiboutikProductException();
+        }
+
+        return $hiboutikProductId;
     }
 }

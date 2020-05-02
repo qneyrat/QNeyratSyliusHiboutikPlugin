@@ -19,22 +19,34 @@ class StockOfHiboutikProductProvider
     /**
      * @var ProductVariantCodeTransformer
      */
-    private ProductVariantCodeTransformer $hiboutikProductVariantIdToProductVariantCodeTransformer;
+    private ProductVariantCodeTransformer $productVariantCodeTransformer;
 
-    public function __construct(HiboutikRepositoryInterface $hiboutikRepository, ProductVariantCodeTransformer $hiboutikProductVariantIdToProductVariantCodeTransformer)
-    {
+    /**
+     * StockOfHiboutikProductProvider constructor.
+     * @param HiboutikRepositoryInterface $hiboutikRepository
+     * @param ProductVariantCodeTransformer $productVariantCodeTransformer
+     */
+    public function __construct(
+        HiboutikRepositoryInterface $hiboutikRepository,
+        ProductVariantCodeTransformer $productVariantCodeTransformer
+    ) {
         $this->hiboutikRepository = $hiboutikRepository;
-        $this->hiboutikProductVariantIdToProductVariantCodeTransformer = $hiboutikProductVariantIdToProductVariantCodeTransformer;
+        $this->productVariantCodeTransformer = $productVariantCodeTransformer;
     }
 
+    /**
+     * @param CodeAwareInterface $codeAware
+     * @return int
+     * @throws MalformedCodeForHiboutikProductException
+     */
     public function getStock(CodeAwareInterface $codeAware): int
     {
-        $ids = $this->hiboutikProductVariantIdToProductVariantCodeTransformer->reverse($codeAware->getCode());
-        if(count($ids) < 2) {
-            throw new MalformedCodeForHiboutikProductException();
-        }
+        list($hiboutikProductId, $hiboutikProductVariantId) = $this
+            ->productVariantCodeTransformer
+            ->reverse($codeAware->getCode());
 
-        $hiboutikStockAvailable = $this->hiboutikRepository->findStocksAvailableByProductVariantId($ids[0], $ids[1]);
+        $hiboutikStockAvailable = $this->hiboutikRepository
+            ->findStocksAvailableByProductVariantId($hiboutikProductId, $hiboutikProductVariantId);
 
         return $hiboutikStockAvailable->getStockAvailable();
     }

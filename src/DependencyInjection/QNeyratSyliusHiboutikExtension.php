@@ -21,9 +21,24 @@ final class QNeyratSyliusHiboutikExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
 
-        $definition = $container->getDefinition('qneyrat.hiboutik.client.hiboutik');
-        $definition->addArgument($config['account']);
-        $definition->addArgument($config['user']);
-        $definition->addArgument($config['api_key']);
+        $container->getDefinition('qneyrat.hiboutik.client.hiboutik')
+            ->replaceArgument(0, $config['account'])
+            ->replaceArgument(1, $config['user'])
+            ->replaceArgument(2, $config['api_key']);
+
+        $container->getDefinition('qneyrat.hiboutik.provider.price')
+            ->replaceArgument(0, $config['currency']);
+
+        $container->getDefinition('qneyrat.hiboutik.provider.default_taxon')
+            ->replaceArgument(0, $config['default_taxon']);
+
+        $container->getDefinition('qneyrat.hiboutik.checker.hiboutik_product')
+            ->replaceArgument(0, $config['product_code_prefix']);
+
+        $container->getDefinition('qneyrat.hiboutik.transformer.product_code')
+            ->replaceArgument(0, $config['product_code_prefix']);
+
+        $container->getDefinition('qneyrat.hiboutik.transformer.variant_product_code')
+            ->replaceArgument(0, $config['product_code_prefix']);
     }
 }
