@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace QNeyrat\SyliusHiboutikPlugin\Checker;
 
 use QNeyrat\SyliusHiboutikPlugin\Provider\StockOfHiboutikProductProvider;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
