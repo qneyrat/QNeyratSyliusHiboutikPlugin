@@ -11,7 +11,7 @@
     "description": "Hiboutik sync plugin for Sylius.",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.3",
         "sylius/sylius": "1.7",
         "fig/http-message-util": "^1.1",
         "symfony/http-client": "^5.0",
