@@ -1,0 +1,25 @@
+services:
+  qneyrat.hiboutik.serializer.property_info_extractor:
+    class: Symfony\Component\PropertyInfo\PropertyInfoExtractor
+    arguments:
+      - []
+      - ["@property_info.php_doc_extractor"]
+
+  qneyrat.hiboutik.serializer.property_info_cache_extractor:
+    class: Symfony\Component\PropertyInfo\PropertyInfoCacheExtractor
+    arguments:
+      - "@qneyrat.hiboutik.serializer.property_info_extractor"
+      - "@cache.app"
+
+  qneyrat.hiboutik.serializer.object_normalizer:
+    class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+    arguments:
+      - ~
+      - "@serializer.name_converter.camel_case_to_snake_case"
+      - ~
+      - "@qneyrat.hiboutik.serializer.property_info_cache_extractor"
+
+  qneyrat.hiboutik.serializer.serializer:
+    class: Symfony\Component\Serializer\Serializer
+    arguments:
+      - ["@serializer.normalizer.datetime", "@serializer.denormalizer.array", "@qneyrat.hiboutik.serializer.object_normalizer"]

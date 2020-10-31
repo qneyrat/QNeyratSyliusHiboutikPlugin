@@ -1,0 +1,8 @@
+services:
+  qneyrat.hiboutik.money.iso_currencies:
+    class: Money\Currencies\ISOCurrencies
+
+  qneyrat.hiboutik.money.parser.decimal_money:
+    class: Money\Parser\DecimalMoneyParser
+    arguments:
+      - "@qneyrat.hiboutik.money.iso_currencies"
