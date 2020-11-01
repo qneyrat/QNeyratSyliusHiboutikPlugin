@@ -126,14 +126,14 @@ class ProductProcessor
      * @param string $locale
      * @param HiboutikProduct $hiboutikProduct
      * @param array $stockAvailables
-     * @return array
+     * @return ProductInterface
      * @throws \Exception
      */
-    private function createOrGetProducts(
+    private function getProduct(
         string $locale,
         HiboutikProduct $hiboutikProduct,
         array $stockAvailables
-    ): array {
+    ): ProductInterface {
         $productCode = $this->productCodeTransformer->transform($hiboutikProduct->getProductId());
 
         /** @var ProductInterface|null $product */
