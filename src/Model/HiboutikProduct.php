@@ -11,117 +11,117 @@ class HiboutikProduct {
     /**
      * @var int
      */
-    private int $productId;
+    private $productId;
 
     /**
      * @var String
      */
-    private string $productModel;
+    private $productModel;
 
     /**
      * @var String
      */
-    private string $productBarcode;
+    private $productBarcode;
 
     /**
      * @var Int
      */
-    private int $productBrand;
+    private $productBrand;
 
     /**
      * @var Int
      */
-    private int $productSupplier;
+    private $productSupplier;
 
     /**
      * @var String
      */
-    private string $productPrice;
+    private $productPrice;
 
     /**
      * @var String
      */
-    private string $productDiscountPrice;
+    private $productDiscountPrice;
 
     /**
      * @var String
      */
-    private string $productSupplyPrice;
+    private $productSupplyPrice;
 
     /**
      * @var Int
      */
-    private int $pointsIn;
+    private $pointsIn;
 
     /**
      * @var Int
      */
-    private int $pointsOut;
+    private $pointsOut;
 
     /**
      * @var Int
      */
-    private int $productCategory;
+    private $productCategory;
 
     /**
      * @var Int
      */
-    private int $productSizeType;
+    private $productSizeType;
 
     /**
      * @var Int
      */
-    private int $productPackage;
+    private $productPackage;
 
     /**
      * @var Int
      */
-    private int $productStockManagement;
+    private $productStockManagement;
 
     /**
      * @var String
      */
-    private string $productSupplierReference;
+    private $productSupplierReference;
 
     /**
      * @var Int
      */
-    private int $productVat;
+    private $productVat;
 
     /**
      * @var Int
      */
-    private int $productDisplay;
+    private $productDisplay;
 
     /**
      * @var Int
      */
-    private int $productDisplayWww;
+    private $productDisplayWww;
 
     /**
      * @var Int
      */
-    private int $productArch;
+    private $productArch;
 
     /**
      * @var String
      */
-    private string $productsDesc;
+    private $productsDesc;
 
     /**
      * @var String
      */
-    private string $productsRefExt;
+    private $productsRefExt;
 
     /**
      * @var Int
      */
-    private int $multiple;
+    private $multiple;
 
     /**
      * @var \DateTimeInterface
      */
-    private \DateTimeInterface $updatedAt;
+    private $updatedAt;
 
     /**
      * @var HiboutikSizeDetail[]|ArrayCollection

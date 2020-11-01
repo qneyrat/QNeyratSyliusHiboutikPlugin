@@ -14,17 +14,17 @@ class HiboutikAvailabilityChecker implements AvailabilityCheckerInterface
     /**
      * @var AvailabilityCheckerInterface
      */
-    private AvailabilityCheckerInterface $parent;
+    private $parent;
 
     /**
      * @var StockOfHiboutikProductProvider
      */
-    private StockOfHiboutikProductProvider $stockOfHiboutikProductProvider;
+    private $stockOfHiboutikProductProvider;
 
     /**
      * @var HiboutikProductChecker
      */
-    private HiboutikProductChecker $hiboutikProductChecker;
+    private $hiboutikProductChecker;
 
     public function __construct(
         AvailabilityCheckerInterface $parent,

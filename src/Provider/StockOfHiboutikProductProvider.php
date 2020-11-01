@@ -14,12 +14,12 @@ class StockOfHiboutikProductProvider
     /**
      * @var HiboutikRepositoryInterface
      */
-    private HiboutikRepositoryInterface $hiboutikRepository;
+    private $hiboutikRepository;
 
     /**
      * @var ProductVariantCodeTransformer
      */
-    private ProductVariantCodeTransformer $productVariantCodeTransformer;
+    private $productVariantCodeTransformer;
 
     /**
      * StockOfHiboutikProductProvider constructor.

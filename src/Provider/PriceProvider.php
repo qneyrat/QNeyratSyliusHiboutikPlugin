@@ -13,12 +13,12 @@ class PriceProvider
     /**
      * @var Currency
      */
-    private Currency $currency;
+    private $currency;
 
     /**
      * @var DecimalMoneyParser
      */
-    private DecimalMoneyParser $moneyParser;
+    private $moneyParser;
 
     /**
      * PriceProvider constructor.

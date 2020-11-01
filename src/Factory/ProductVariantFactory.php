@@ -17,22 +17,22 @@ class ProductVariantFactory
     /**
      * @var FactoryInterface
      */
-    private FactoryInterface $productVariantFactory;
+    private $productVariantFactory;
 
     /**
      * @var RepositoryInterface
      */
-    private RepositoryInterface $channelPricingRepository;
+    private $channelPricingRepository;
 
     /**
      * @var FactoryInterface
      */
-    private FactoryInterface $channelPricingFactory;
+    private $channelPricingFactory;
 
     /**
      * @var PriceProvider
      */
-    private PriceProvider $priceProvider;
+    private $priceProvider;
 
     /**
      * ProductVariantFactory constructor.

@@ -13,7 +13,7 @@ class ProductCodeTransformer
     /**
      * @var string
      */
-    private string $productCodePrefix;
+    private $productCodePrefix;
 
     /**
      * ProductCodeTransformer constructor.

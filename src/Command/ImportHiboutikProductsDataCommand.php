@@ -15,12 +15,12 @@ final class ImportHiboutikProductsDataCommand extends Command
     /**
      * @var HiboutikRepositoryInterface
      */
-    private HiboutikRepositoryInterface $hiboutikRepository;
+    private $hiboutikRepository;
 
     /**
      * @var ProductProcessor
      */
-    private ProductProcessor $productProcessor;
+    private $productProcessor;
 
     /**
      * ImportDataCommand constructor.

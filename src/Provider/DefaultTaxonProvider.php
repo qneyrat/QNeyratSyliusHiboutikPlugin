@@ -14,22 +14,22 @@ class DefaultTaxonProvider
     /**
      * @var string
      */
-    private string $defaultTaxonName;
+    private $defaultTaxonName;
 
     /**
      * @var TaxonRepositoryInterface
      */
-    private TaxonRepositoryInterface $taxonRepository;
+    private $taxonRepository;
 
     /**
      * @var FactoryInterface
      */
-    private FactoryInterface $taxonFactory;
+    private $taxonFactory;
 
     /**
      * @var SlugGeneratorInterface
      */
-    private SlugGeneratorInterface $slugGenerator;
+    private $slugGenerator;
 
     /**
      * DefaultTaxonProvider constructor.

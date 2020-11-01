@@ -9,17 +9,17 @@ class HiboutikSizeDetail
     /**
      * @var int
      */
-    private int $sizeId;
+    private $sizeId;
 
     /**
      * @var String
      */
-    private string $sizeName;
+    private $sizeName;
 
     /**
      * @var String
      */
-    private string $barcode;
+    private $barcode;
 
     /**
      * @return int

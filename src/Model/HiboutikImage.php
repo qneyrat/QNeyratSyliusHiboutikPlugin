@@ -9,17 +9,17 @@ class HiboutikImage
     /**
      * @var string
      */
-    private string $url;
+    private $url;
 
     /**
      * @var string
      */
-    private string $width;
+    private $width;
 
     /**
      * @var string
      */
-    private string $height;
+    private $height;
 
     /**
      * @return string

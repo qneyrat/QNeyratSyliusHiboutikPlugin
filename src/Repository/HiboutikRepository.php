@@ -15,12 +15,12 @@ class HiboutikRepository implements HiboutikRepositoryInterface {
     /**
      * @var HiboutikClientInterface
      */
-    private HiboutikClientInterface $client;
+    private $client;
 
     /**
      * @var DenormalizerInterface
      */
-    private DenormalizerInterface $denormalizer;
+    private $denormalizer;
 
     /**
      * HiboutikRepository constructor.

@@ -18,22 +18,22 @@ class ProductFactory
     /**
      * @var ProductFactoryInterface
      */
-    private ProductFactoryInterface $productFactory;
+    private $productFactory;
 
     /**
      * @var SlugGeneratorInterface
      */
-    private SlugGeneratorInterface $slugGenerator;
+    private $slugGenerator;
 
     /**
      * @var ProductTaxonRepositoryInterface
      */
-    private ProductTaxonRepositoryInterface $productTaxonRepository;
+    private $productTaxonRepository;
 
     /**
      * @var FactoryInterface
      */
-    private FactoryInterface $productTaxonFactory;
+    private $productTaxonFactory;
 
     /**
      * ProductFactory constructor.

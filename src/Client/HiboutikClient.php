@@ -20,7 +20,7 @@ class HiboutikClient implements HiboutikClientInterface {
     /**
      * @var HttpClientInterface
      */
-    private HttpClientInterface $client;
+    private $client;
 
     public function __construct(string $account, string $user, string $apiKey, HttpClientInterface $client = null)
     {

@@ -9,27 +9,27 @@ class HiboutikStockAvailable
     /**
      * @var int
      */
-    private int $productId;
+    private $productId;
 
     /**
      * @var int
      */
-    private int $productSize;
+    private $productSize;
 
     /**
      * @var int
      */
-    private int $warehouseId;
+    private $warehouseId;
 
     /**
      * @var int
      */
-    private int $stockAvailable;
+    private $stockAvailable;
 
     /**
      * @var int
      */
-    private int $inventoryAlert;
+    private $inventoryAlert;
 
     /**
      * @return int

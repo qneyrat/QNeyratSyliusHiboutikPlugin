@@ -25,52 +25,52 @@ class ProductProcessor
     /**
      * @var ChannelRepositoryInterface
      */
-    private ChannelRepositoryInterface $channelRepository;
+    private $channelRepository;
 
     /**
      * @var ProductRepositoryInterface
      */
-    private ProductRepositoryInterface $productRepository;
+    private $productRepository;
 
     /**
      * @var SlugGeneratorInterface
      */
-    private SlugGeneratorInterface $slugGenerator;
+    private $slugGenerator;
 
     /**
      * @var RepositoryInterface
      */
-    private RepositoryInterface $productVariantRepository;
+    private $productVariantRepository;
 
     /**
      * @var LocaleProviderInterface
      */
-    private LocaleProviderInterface $localeProvider;
+    private $localeProvider;
 
     /**
      * @var ProductCodeTransformer
      */
-    private ProductCodeTransformer $productCodeTransformer;
+    private $productCodeTransformer;
 
     /**
      * @var ProductVariantCodeTransformer
      */
-    private ProductVariantCodeTransformer $productVariantCodeTransformer;
+    private $productVariantCodeTransformer;
 
     /**
      * @var ProductFactory
      */
-    private ProductFactory $productFactory;
+    private $productFactory;
 
     /**
      * @var DefaultTaxonProvider
      */
-    private DefaultTaxonProvider $defaultTaxonProvider;
+    private $defaultTaxonProvider;
 
     /**
      * @var ProductVariantFactory
      */
-    private ProductVariantFactory $productVariantFactory;
+    private $productVariantFactory;
 
     /**
      * ProductProcessor constructor.

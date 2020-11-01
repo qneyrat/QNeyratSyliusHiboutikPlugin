@@ -11,7 +11,7 @@ class HiboutikProductChecker
     /**
      * @var string
      */
-    private string $productCodePrefix;
+    private $productCodePrefix;
 
     /**
      * HiboutikProductChecker constructor.
