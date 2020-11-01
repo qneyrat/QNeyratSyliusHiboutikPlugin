@@ -75,7 +75,7 @@ class ProductVariantFactory
         $productVariant = $this->productVariantFactory->createNew();
         $productVariant->setCode($productVariantCode);
         $productVariant->setCurrentLocale($locale);
-        $productVariant->setName(substr($hiboutikSizeDetail->getSizeName(), 0, 255)."-".$productVariantCode);
+        $productVariant->setName(substr($hiboutikSizeDetail->getSizeName(), 0, 255));
 
         foreach ($channels as $channel) {
 
