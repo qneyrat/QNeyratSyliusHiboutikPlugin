@@ -84,7 +84,7 @@ class ProductFactory
         $product->setMainTaxon($taxon);
         $product->setCurrentLocale($locale);
         $product->setFallbackLocale($locale);
-        $product->setName(substr($hiboutikProduct->getProductModel(), 0, 255));
+        $product->setName(substr($hiboutikProduct->getProductModel(), 0, 255)."-".$productCode);
         $product->setEnabled(false);
         $product->setSlug($product->getSlug() ?: $this->slugGenerator->generate($product->getName()));
 
