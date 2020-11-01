@@ -45,14 +45,14 @@ class ProductVariantCodeTransformer
      */
     public function reverse(string $productVariantCode): array
     {
-        $n = sscanf(
+        sscanf(
             $productVariantCode,
             $this->productCodePrefix . PRODUCT_CODE_SCHEME,
             $hiboutikProductId,
             $hiboutikProductVariantId
         );
 
-        if ($n !== 1 || $hiboutikProductId === null || $hiboutikProductVariantId === null) {
+        if ($hiboutikProductId === null || $hiboutikProductVariantId === null) {
             throw new MalformedCodeForHiboutikProductException();
         }
 
